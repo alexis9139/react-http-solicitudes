@@ -2,13 +2,14 @@ import React from 'react'
 
 class App2 extends React.Component {
     state = {
-        movie: '',
-        cargado: true
+        movie: {},
+        cargado: false
     }
     manejador = (event) => {
         event.preventDefault()
         //extraemos informacion del nombre de la pelicula
         const title = event.target[0].value
+        this.setState({ cargado: true })
 
         const url = 'http://www.omdbapi.com/?i=tt3896198&apikey=d93ac35c'
 
@@ -17,8 +18,7 @@ class App2 extends React.Component {
             .then(movie => this.setState({ movie, cargado: false }))
     }
     render() {
-
-        if (this.state.cargando) {
+        if (this.state.cargado) {
             return <h1>Cargando...</h1>
         }
         const { movie } = this.state
